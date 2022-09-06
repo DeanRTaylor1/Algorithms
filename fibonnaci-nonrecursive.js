@@ -1,7 +1,7 @@
 #!/usr/bin/node
 
 function fibs(num){
-    if(num === 0 || num < 1){s
+    if(num === 0 || num < 1){
         return [0]
     }
     else if(num === 1){
