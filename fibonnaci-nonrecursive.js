@@ -8,8 +8,8 @@ function fibs(num){
         return [0]
     } else {
         let x = [0, 1]
-        a = 0
-        b = 1
+       let  a = 0
+        let b = 1
         let c
         for(let i = 1; i < num - 1; i++){
             c = a + b

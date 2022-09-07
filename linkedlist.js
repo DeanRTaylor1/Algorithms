@@ -1,14 +1,10 @@
 #!/usr/bin/node
 
 class node {
-
     constructor(val){
         this.val = val;
         this.next = null
     }   
-
-
-
 }
 
 class linkedList {
@@ -23,6 +19,7 @@ class linkedList {
         if(!this.head){
             this.head = node1
             this.tail = this.head
+            
         } else{
             this.tail.next = node1
             this.tail = node1
@@ -109,7 +106,7 @@ class linkedList {
             let nodeString = ''
             while(cVal != null){
                 if(cVal.next == null){
-                    nodeString += `( cVal.val )`
+                    nodeString += `( ${cVal.val} )`
                     cVal = cVal.next   
                 } else {
                 nodeString += `( ${cVal.val} ) => `
@@ -120,26 +117,63 @@ class linkedList {
             return nodeString
         }
     }
-
+    insertAt(val, index){
+        
+        if(!this.head){
+            console.log('please use append function as list is empty')
+        } else if(index === 0){
+            this.prepend(val)            
+        } else if(index === this.length - 1){
+            this.append(val)
+        }
+            else{
+            let node1 = new node(val);
+            let currentItemAtIndex = this.at(index)
+            let itemBeforeIndex = this.at(index - 1)
+            node1.next = currentItemAtIndex
+            itemBeforeIndex.next = node1
+        }
+        this.length++
+        return this
+    }
+    removeAt(index){
+        if(!this.head){
+            console.log('List is empty')
+        } else if(index === 0){
+            let currenthead = this.at(index)
+            this.head = currenthead.next
+            currenthead.next = null
+        }else if(index === this.length - 1) {
+            this.pop()
+        }else{
+            //let currentItemAtIndex = this.at(index)
+            let itemBeforeIndex = this.at(index - 1)
+            itemBeforeIndex.next = itemBeforeIndex.next.next
+            
+        }
+        this.length--
+        return this
+    }
+    
 }
 
 
 
-let linkedList1 = new linkedList();
+// let linkedList1 = new linkedList();
 
-linkedList1.append('1')
-linkedList1.append('2')
-linkedList1.append('3')
-linkedList1.prepend('0')
-linkedList1.append('2')
-linkedList1.append('2')
-linkedList1.append('3')
-linkedList1.prepend('0')
-linkedList1.append('3')
-linkedList1.prepend('0')
-linkedList1.append('newlastitem')
-linkedList1.append('popthis')
-let lastItem = linkedList1.length
-let index = linkedList1.find('newlastitem')
-console.log(linkedList1.toString())
-// console.log(linkedList1.pop())
+// linkedList1.append('1')
+// linkedList1.append('2')
+// linkedList1.append('3')
+// linkedList1.prepend('0')
+// linkedList1.append('newlastitem')
+// linkedList1.append('popthis')
+// let lastItem = linkedList1.length
+// let index = linkedList1.find('newlastitem')
+// console.log(linkedList1.toString())
+// linkedList1.insertAt('insertthis', 2)
+// linkedList1.insertAt('removethis', 2)
+// console.log(linkedList1.toString())
+// let lastval = linkedList1.length - 1
+// linkedList1.removeAt(lastval)
+// console.log(linkedList1.toString(), linkedList1.tail)
+// // console.log(linkedList1.pop())
