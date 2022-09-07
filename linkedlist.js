@@ -64,9 +64,62 @@ class linkedList {
             this.length--
             return this
         }
-
     }
-
+    contains(val){
+        if(!this.head){
+            return false
+        } else {
+            let cVal = this.head
+            let result
+            while(cVal != null && result != true){
+                if(cVal.val === val){
+                    result = true
+                } else {
+                cVal = cVal.next
+                result = false
+            }            
+        }
+        return result
+        }
+    }
+    find(val){
+        if(!this.head){
+            return 'List is empty'
+        } else {
+            let cVal = this.head
+            let index = 0
+            let result
+            while(cVal != null && result != true){
+                if(cVal.val === val){
+                    result = true
+                } else {
+                cVal = cVal.next
+                result = false
+                index++
+            }            
+        }
+        return index
+        }
+    }
+    toString() {
+        if(!this.head){
+            return 'List is empty'
+        } else {
+            let cVal = this.head
+            let nodeString = ''
+            while(cVal != null){
+                if(cVal.next == null){
+                    nodeString += `( cVal.val )`
+                    cVal = cVal.next   
+                } else {
+                nodeString += `( ${cVal.val} ) => `
+                cVal = cVal.next                 
+                }
+                       
+            }
+            return nodeString
+        }
+    }
 
 }
 
@@ -78,7 +131,15 @@ linkedList1.append('1')
 linkedList1.append('2')
 linkedList1.append('3')
 linkedList1.prepend('0')
+linkedList1.append('2')
+linkedList1.append('2')
+linkedList1.append('3')
+linkedList1.prepend('0')
+linkedList1.append('3')
+linkedList1.prepend('0')
 linkedList1.append('newlastitem')
 linkedList1.append('popthis')
 let lastItem = linkedList1.length
-console.log(linkedList1.pop())
+let index = linkedList1.find('newlastitem')
+console.log(linkedList1.toString())
+// console.log(linkedList1.pop())
