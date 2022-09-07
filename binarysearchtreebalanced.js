@@ -1,4 +1,3 @@
-
 #!/usr/bin/node
 
 function minValue(root) {
@@ -170,17 +169,38 @@ class tree {
       ? this.height(node.left) + 1
       : this.height(node.right) + 1;
   }
-  depth(node) {
-    let a = height(node);
-    return a;
-    // if(node === node){
-    //     return 0
-    // }
-    // return depth(node.left) + 1 === 0 ? depth(node.right) + 1 : depth(node.left) + 1
+  depth(node, root = this.root) {
+    if (root == null) {
+      return;
+    } else if (node === root) {
+      return 0;
+    } else {
+      return (
+        this.depth(node, root.right) + 1 || this.depth(node, root.left) + 1
+      );
+    }
   }
+  isBalanced(node = this.root) {
+    if (node == null) {
+      return false;
+    }
+    let left = node.left;
+    let right = node.right;
+    if (Math.abs(this.height(left) - this.height(right)) > 1) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   log(data) {
     console.log(data);
   }
+}
+
+function reBalance(currentTree) {
+  let array = currentTree.inOrder(currentTree.root);
+  return new tree(array);
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -198,12 +218,25 @@ let array = [
 ];
 let bst = new tree(array);
 let bstNode = bst.root;
-bst.insertNode(bstNode, 90000);
-console.log(bst.findNode(bstNode, 90000));
+
 prettyPrint(bstNode);
+console.log(bst.isBalanced());
+
+prettyPrint(bstNode);
+
+bst.deleteNode(bstNode, 1);
+bst.deleteNode(bstNode, 3);
+bst.deleteNode(bstNode, 4);
+bst.deleteNode(bstNode, 5);
+bst.deleteNode(bstNode, 8);
 bst.deleteNode(bstNode, 9);
+bst.deleteNode(bstNode, 5);
+bst.deleteNode(bstNode, 7);
+bst.deleteNode(bstNode, 10);
 prettyPrint(bstNode);
-
-//bst.levelOrder(bst.root)
-
-console.log(bst.height(bstNode.right.right));
+console.log(bst.isBalanced());
+bst = reBalance(bst);
+bstNode = bst.root;
+prettyPrint(bstNode);
+console.log(bst.isBalanced());
+//console.log(bst.rebalanced);
