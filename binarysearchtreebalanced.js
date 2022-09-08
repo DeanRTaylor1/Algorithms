@@ -212,31 +212,35 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
     prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
   }
 };
+function testScript() {
+  let array = [];
 
-let array = [
-  1, 10, 7, 4, 23, 8, 9, 4, 3, 5, 9000, 6999, 7000, 7001, 7, 9, 67, 6345, 324,
-];
-let bst = new tree(array);
-let bstNode = bst.root;
+  for (let i = 0; i < 51; i++) {
+    array.push(Math.floor(Math.random() * 100));
+  }
+  console.log(array);
+  let bst = new tree(array);
+  let bstNode = bst.root;
+  prettyPrint(bstNode);
+  console.log(bst.isBalanced());
+  bst.levelOrder(bstNode);
+  console.log(bst.preOrder(bstNode));
+  console.log(bst.postOrder(bstNode));
+  console.log(bst.inOrder(bstNode));
+  console.log(bst.isBalanced());
+  for (let i = 0; i < 51; i++) {
+    bst.insertNode(bstNode, Math.floor(Math.random() * 1000));
+  }
+  prettyPrint(bstNode);
+  console.log(bst.isBalanced());
+  bst = reBalance(bst);
+  bstNode = bst.root;
+  prettyPrint(bstNode);
+  console.log(bst.isBalanced());
+  bst.levelOrder(bstNode);
+  console.log(bst.preOrder(bstNode));
+  console.log(bst.postOrder(bstNode));
+  console.log(bst.inOrder(bstNode));
+}
 
-prettyPrint(bstNode);
-console.log(bst.isBalanced());
-
-prettyPrint(bstNode);
-
-bst.deleteNode(bstNode, 1);
-bst.deleteNode(bstNode, 3);
-bst.deleteNode(bstNode, 4);
-bst.deleteNode(bstNode, 5);
-bst.deleteNode(bstNode, 8);
-bst.deleteNode(bstNode, 9);
-bst.deleteNode(bstNode, 5);
-bst.deleteNode(bstNode, 7);
-bst.deleteNode(bstNode, 10);
-prettyPrint(bstNode);
-console.log(bst.isBalanced());
-bst = reBalance(bst);
-bstNode = bst.root;
-prettyPrint(bstNode);
-console.log(bst.isBalanced());
-//console.log(bst.rebalanced);
+testScript();
